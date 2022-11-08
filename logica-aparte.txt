@@ -1,0 +1,46 @@
+function game() {
+  let word = wordSelect();
+  let palabraSinLetras = [];
+  let userSeleccion
+  let counter = true;
+  let letrasUsadas =[];
+  let vidas = 5;
+  const letras = ['q','w','e','r','t','y','u','i','o','p','a','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m']
+  for( let i = 0 ; i < word.length; i++){
+    palabraSinLetras.push("_")
+  }
+  console.log(palabraSinLetras)
+  
+  do {
+
+    userSeleccion = prompt(`Bienvenido al Ahorcado (Hangman) favor de ingresar letra por letra\n\nEsta es la Palabra: \n ${palabraSinLetras}\n Te quedan ${vidas} vidas\n\n Letras usadas: ${letrasUsadas}`)
+
+    letrasUsadas.push(userSeleccion)
+
+
+    if (word.includes(userSeleccion)){
+      for (let i = 0; i < word.length; i++) {
+        
+        if(word[i] === userSeleccion) {
+          palabraSinLetras[i] = userSeleccion;
+          console.log("correcto")
+          console.log(palabraSinLetras)
+        }
+        
+      }
+    } else vidas -= 1
+
+    if(vidas == 0){
+      alert(`Tus vidas se acabaron, perdiste`)
+      counter = false
+    }
+
+    console.log(word,palabraSinLetras.join(""))
+    console.log(word == palabraSinLetras.join(""))
+
+    if(word == palabraSinLetras.join("")){
+      alert (`Ganaste la palabra es ${word}`)
+      counter = false
+    }
+  }while( counter == true)
+}
