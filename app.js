@@ -42,7 +42,6 @@ for (let i = 0; i < word.length; i++) {
   palabraSinLetras.push("_");
 }
 
-
 wordDisplay.innerText = palabraSinLetras;
 
 letras.forEach((letra, index) => {
@@ -61,6 +60,8 @@ keyNode.forEach((element) => {
     letrasUsadas2.push(element.innerText);
     console.log(letrasUsadas2);
     usedWords.innerText = letrasUsadas2;
+
+    
     if (word.includes(userSeleccion)) {
       for (let i = 0; i < word.length; i++) {
         if (word[i] === userSeleccion) {
@@ -71,7 +72,27 @@ keyNode.forEach((element) => {
         wordDisplay.innerText = palabraSinLetras;
       }
     } else vidas.innerText -= 1;
-  });
+
+    if(palabraSinLetras.join("") == word){
+      Swal.fire({
+        title: 'Ganador!',
+        text: `La palabra es ${word}`,
+        icon: 'succes',
+        confirmButtonText: 'Cool'
+      }).then(result => {result.isConfirmed && Swal.fire(window.location.reload())
+      })
+    } 
+    console.log(vidas,"debugg aqui")
+    if(vidas.innerText == 0) {
+      Swal.fire({
+      title: 'Perdiste',
+      text: `La palabra es ${word}`,
+      icon: 'error',
+      confirmButtonText: 'Repetir'
+    }).then((result) => {result.isConfirmed && Swal.fire(window.location.reload())}
+    )}
+  }
+  );
 });
 
 function wordSelect() {
